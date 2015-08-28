@@ -1,7 +1,7 @@
 [
     {
       "name": "registry",
-      "image": "allingeek/registry:2-s3",
+      "image": "${registry_docker_image}",
       "cpu": 1024,
       "memory": 1000,
       "entryPoint": [],

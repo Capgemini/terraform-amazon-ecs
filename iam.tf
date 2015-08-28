@@ -1,20 +1,3 @@
-/* template files for registry and ecs role policies */
-resource "template_file" "registry-policy" {
-  filename = "policies/registry.json"
-
-  vars {
-    s3_bucket_name = "${var.s3_bucket_name}"
-  }
-}
-
-resource "template_file" "ecs_role_policy" {
-  filename = "policies/ecs-role-policy.json"
-
-  vars {
-    s3_bucket_name = "${var.s3_bucket_name}"
-  }
-}
-
 /* registry user, access key and policies */
 resource "aws_iam_user" "registry" {
   name = "${var.registry_username}"
@@ -41,8 +24,25 @@ resource "aws_iam_role" "ecs_role" {
   assume_role_policy = "${file("policies/ecs-role.json")}"
 }
 
-resource "aws_iam_role_policy" "ecs_role_policy" {
-  name     = "ecs_role_policy"
-  policy   = "${template_file.ecs_role_policy.rendered}"
+/* ecs service scheduler role */
+resource "aws_iam_role_policy" "ecs_service_role_policy" {
+  name     = "ecs_service_role_policy"
+  policy   = "${template_file.ecs_service_role_policy.rendered}"
   role     = "${aws_iam_role.ecs_role.id}"
+}
+
+/* ec2 container instance role & policy */
+resource "aws_iam_role_policy" "ecs_instance_role_policy" {
+  name     = "ecs_instance_role_policy"
+  policy   = "${file("policies/ecs-instance-role-policy.json")}"
+  role     = "${aws_iam_role.ecs_role.id}"
+}
+
+/**
+ * IAM profile to be used in auto-scaling launch configuration.
+ */
+resource "aws_iam_instance_profile" "ecs" {
+  name = "ecs-instance-profile"
+  path = "/"
+  roles = ["${aws_iam_role.ecs_role.name}"]
 }

@@ -1,9 +1,3 @@
-output "registry.access_key" {
-  value = "${aws_iam_access_key.registry.id}"
-}
-output "registry.secret_key" {
-  value = "${aws_iam_access_key.registry.secret}"
-}
-output "registry.ip" {
+output "registry.dns_name" {
   value = "${aws_elb.s3-registry-elb.dns_name}"
 }

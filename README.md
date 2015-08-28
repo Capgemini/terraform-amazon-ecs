@@ -1,9 +1,8 @@
 # Terraform AWS ECS (+ Docker Registry)
 
-**Note** - This is still a work in progress, some aspects may not function quite correctly
-yet... Feel free to jump in and start fixing issues.
+**Note** - This is still a work in progress, so expect issues and bugs .. Feel free to jump in and start fixing things.
 
-This repo contains a [Terraform](https://www.terraform.io) plan to run up an Amazon ECS cluster with a private Docker registry.
+This repo contains a [Terraform](https://www.terraform.io) plan to run up an [Amazon ECS](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) cluster with a private Docker registry.
 
 Inspired from [http://blog.codeship.com/running-a-private-docker-registry-on-ec2/](http://blog.codeship.com/running-a-private-docker-registry-on-ec2/)
 

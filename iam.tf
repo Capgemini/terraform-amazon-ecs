@@ -9,7 +9,7 @@ resource "aws_iam_access_key" "registry" {
 
 resource "aws_iam_policy" "registry" {
   name   = "registryaccess"
-  policy = "${template_file.registry-policy.rendered}"
+  policy = "${template_file.registry_policy.rendered}"
 }
 
 resource "aws_iam_policy_attachment" "registry-attach" {

@@ -59,18 +59,7 @@ resource "aws_ecs_service" "s3-registry-elb" {
   }
 }
 
-resource "template_file" "registry-task" {
-  filename = "task-definitions/registry.json"
-
-  vars {
-    s3_bucket_name       = "${aws_s3_bucket.registry.id}"
-    s3_bucket_region     = "${aws_s3_bucket.registry.region}"
-    s3_bucket_access_key = "${aws_iam_access_key.registry.id}"
-    s3_bucket_secret_key = "${aws_iam_access_key.registry.secret}"
-  }
-}
-
 resource "aws_ecs_task_definition" "registry" {
   family                = "registry"
-  container_definitions = "${template_file.registry-task.rendered}"
+  container_definitions = "${template_file.registry_task.rendered}"
 }

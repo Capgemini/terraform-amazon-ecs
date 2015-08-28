@@ -1,5 +1,5 @@
 /* template files for registry and ecs role policies */
-resource "template_file" "registry-policy" {
+resource "template_file" "registry_policy" {
   filename = "policies/registry.json"
 
   vars {
@@ -12,5 +12,17 @@ resource "template_file" "ecs_service_role_policy" {
 
   vars {
     s3_bucket_name = "${var.s3_bucket_name}"
+  }
+}
+
+resource "template_file" "registry_task" {
+  filename = "task-definitions/registry.json"
+
+  vars {
+    s3_bucket_name        = "${aws_s3_bucket.registry.id}"
+    s3_bucket_region      = "${aws_s3_bucket.registry.region}"
+    s3_bucket_access_key  = "${aws_iam_access_key.registry.id}"
+    s3_bucket_secret_key  = "${aws_iam_access_key.registry.secret}"
+    registry_docker_image = "${var.registry_docker_image}"
   }
 }

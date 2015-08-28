@@ -1,0 +1,39 @@
+[
+    {
+      "name": "registry",
+      "image": "allingeek/registry:2-s3",
+      "cpu": 1024,
+      "memory": 1000,
+      "entryPoint": [],
+      "environment": [
+        {
+          "name": "REGISTRY_STORAGE_S3_ACCESSKEY",
+          "value": "${s3_bucket_access_key}"
+        },
+        {
+          "name": "REGISTRY_STORAGE_S3_SECRETKEY",
+          "value": "${s3_bucket_secret_key}"
+        },
+        {
+          "name": "REGISTRY_STORAGE_S3_REGION",
+          "value": "${s3_bucket_region}"
+        },
+        {
+          "name": "REGISTRY_STORAGE_S3_BUCKET",
+          "value": "${s3_bucket_name}"
+        }
+      ],
+      "command": ["/etc/docker/registry/config.yml"],
+      "portMappings": [
+        {
+          "hostPort": 5000,
+          "containerPort": 5000,
+          "protocol": "tcp"
+        }
+      ],
+      "volumesFrom": [],
+      "links": [],
+      "mountPoints": [],
+      "essential": true
+    }
+]

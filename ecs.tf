@@ -24,8 +24,7 @@ resource "aws_launch_configuration" "ecs" {
  */
 resource "aws_autoscaling_group" "ecs" {
   name                 = "ecs-asg"
-  /* @todo - split out to a variable */
-  availability_zones   = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+  availability_zones   = ["${split(",", var.availability_zones)}"]
   launch_configuration = "${aws_launch_configuration.ecs.name}"
   /* @todo - variablize */
   min_size             = 1

@@ -10,8 +10,7 @@ resource "aws_s3_bucket" "registry" {
 /* ELB for the registry */
 resource "aws_elb" "s3-registry-elb" {
   name               = "s3-registry-elb"
-  /* @todo - split out to a variable */
-  availability_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+  availability_zones = ["${split(",", var.availability_zones)}"]
 
   listener {
     instance_port     = 5000

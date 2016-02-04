@@ -1,23 +1,3 @@
-/* registry user, access key and policies */
-resource "aws_iam_user" "registry" {
-  name = "${var.registry_username}"
-}
-
-resource "aws_iam_access_key" "registry" {
-  user = "${aws_iam_user.registry.name}"
-}
-
-resource "aws_iam_policy" "registry" {
-  name   = "registryaccess"
-  policy = "${template_file.registry_policy.rendered}"
-}
-
-resource "aws_iam_policy_attachment" "registry-attach" {
-  name       = "registry-attachment"
-  users      = ["${aws_iam_user.registry.name}"]
-  policy_arn = "${aws_iam_policy.registry.arn}"
-}
-
 /* ecs iam role and policies */
 resource "aws_iam_role" "ecs_role" {
   name               = "ecs_role"
@@ -27,7 +7,7 @@ resource "aws_iam_role" "ecs_role" {
 /* ecs service scheduler role */
 resource "aws_iam_role_policy" "ecs_service_role_policy" {
   name     = "ecs_service_role_policy"
-  policy   = "${template_file.ecs_service_role_policy.rendered}"
+  policy   = "${file("policies/ecs-service-role-policy.json")}"
   role     = "${aws_iam_role.ecs_role.id}"
 }
 

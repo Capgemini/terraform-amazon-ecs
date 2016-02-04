@@ -61,3 +61,10 @@ variable "key_file" {
   description = "The ssh public key for using with the cloud provider."
   default = ""
 }
+
+variable "dockerhub_auth" {
+  default = ""
+}
+variable "dockerhub_email" {
+  default = ""
+}

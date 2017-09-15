@@ -55,3 +55,11 @@ This is probably down to this bug / issue with waits/timeouts - [https://github.
 
 You can either compile terraform from the latest master branch, or re-run the terraform
 apply again which should succeed the second time.
+
+## AlertSense Interview Process
+### Group Presentation
+Refer to this README.md
+
+### Coding Interview / Problem solving
+
+CodeFights link: https://codefights.com/challenge/rmuw5jeqPubNFA6C7/solutions

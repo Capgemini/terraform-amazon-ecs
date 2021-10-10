@@ -1,4 +1,5 @@
 ######################## Terraform AWS ECS (+ Docker Registry)
+######################## Terraform AWS ECS (+ Docker Registry)
 
 **Note** - This is still a work in progress, so expect issues and bugs .. Feel free to jump in and start fixing things.
 
